@@ -17,6 +17,10 @@ public class MorseLogic {
         englishToMorse.put('V', "...-"); englishToMorse.put('W', ".--"); englishToMorse.put('X', "-..-");
         englishToMorse.put('Y', "-.--"); englishToMorse.put('Z', "--..");
 
+        // Swedish Letters
+        englishToMorse.put('Å', ".--.-"); englishToMorse.put('Ä', ".-.-"); englishToMorse.put('Ö', "---.");
+        englishToMorse.put('å', ".--.-"); englishToMorse.put('ä', ".-.-"); englishToMorse.put('ö', "---.");
+
         // Numbers
         englishToMorse.put('0', "-----"); englishToMorse.put('1', ".----"); englishToMorse.put('2', "..---");
         englishToMorse.put('3', "...--"); englishToMorse.put('4', "....-"); englishToMorse.put('5', ".....");
@@ -29,12 +33,7 @@ public class MorseLogic {
         englishToMorse.put('(', "-.--."); englishToMorse.put(')', "-.--.-"); englishToMorse.put('&', ".-...");
         englishToMorse.put('@', ".--.-."); englishToMorse.put('=', "-...-"); englishToMorse.put('+', ".-.-.");
         englishToMorse.put('-', "-....-"); englishToMorse.put('_', "..--.-"); englishToMorse.put('$', "...-..-");
-        englishToMorse.put('"', ".-..-."); englishToMorse.put('\'', ".----.");
-
-        // Support lowercase letters by adding them explicitly
-        for (Map.Entry<Character, String> entry : new HashMap<>(englishToMorse).entrySet()) {
-            englishToMorse.put(Character.toLowerCase(entry.getKey()), entry.getValue());
-        }
+        englishToMorse.put('"', ".-..-."); englishToMorse.put('\'', ".----."); englishToMorse.put('%', "-----.-");
 
         // Reverse map for Morse to English conversion
         for (Map.Entry<Character, String> entry : englishToMorse.entrySet()) {
@@ -54,7 +53,7 @@ public class MorseLogic {
             } else if (c == ' ') {
                 morseText.append("/ "); // Space between words in Morse
             } else {
-                throw new IllegalArgumentException("Invalid character: " + c);
+                throw new IllegalArgumentException("Invalid character: " + c); // Ensure exception is thrown
             }
         }
         return morseText.toString().trim();
@@ -73,9 +72,9 @@ public class MorseLogic {
             } else if (morseToEnglish.containsKey(word)) {
                 englishText.append(morseToEnglish.get(word));
             } else {
-                throw new IllegalArgumentException("Invalid Morse code: " + word);
+                throw new IllegalArgumentException("Invalid Morse code: " + word); // Ensure exception is thrown
             }
         }
-        return englishText.toString();
+        return englishText.toString(); // Preserve original case
     }
 }
