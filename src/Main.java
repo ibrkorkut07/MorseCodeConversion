@@ -23,7 +23,6 @@ public class Main {
                 scanner.next(); // Consume the invalid input
             }
         }
-        scanner.nextLine();
 
         while (true) {
             try {
@@ -39,15 +38,12 @@ public class Main {
                     String englishText = logic.morseToEnglish(morseCode);
                     System.out.println("English text: " + englishText);
                     break;
-                } else {
-                    System.out.println("Invalid choice. Please enter 1 or 2.");
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println("Error: " + e.getMessage());
                 System.out.println("Please try again.");
-            } finally {
-                scanner.close();
             }
         }
+        scanner.close();
     }
 }
