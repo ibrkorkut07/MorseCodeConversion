@@ -1,12 +1,14 @@
 import java.util.Scanner;
+
 // Main class for user interaction
 public class Main {
     public static void main(String[] args) {
         MorseLogic logic = new MorseLogic();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter 1 to convert English to Morse code");
-        System.out.println("Enter 2 to convert Morse code to English");
+        System.out.println("Enter 1 to convert English/Swedish to Morse code");
+        System.out.println("Enter 2 to convert Morse code to English/Swedish");
+
         int choice;
         while (true) {
             System.out.print("Enter your choice (1 or 2): ");
@@ -27,7 +29,7 @@ public class Main {
         while (true) {
             try {
                 if (choice == 1) {
-                    System.out.println("Enter English text:");
+                    System.out.println("Enter English/Swedish text:");
                     String englishText = scanner.nextLine();
                     String morseCode = logic.englishToMorse(englishText);
                     System.out.println("Morse code: " + morseCode);
@@ -36,7 +38,7 @@ public class Main {
                     System.out.println("Enter Morse code (separate letters with spaces, words with /):");
                     String morseCode = scanner.nextLine();
                     String englishText = logic.morseToEnglish(morseCode);
-                    System.out.println("English text: " + englishText);
+                    System.out.println("The text: " + englishText); // Preserve original case
                     break;
                 }
             } catch (IllegalArgumentException e) {
@@ -44,6 +46,7 @@ public class Main {
                 System.out.println("Please try again.");
             }
         }
+
         scanner.close();
     }
 }
