@@ -27,3 +27,37 @@ public class MorseLogic {
             morseToEnglish.put(entry.getValue(), entry.getKey());
         }
     }
+
+    public String englishToMorse(String englishText) {
+        if (englishText == null || englishText.trim().isEmpty()) {
+            throw new IllegalArgumentException("Input cannot be empty or just whitespace");
+        }
+        StringBuilder morseText = new StringBuilder();
+        for (char c : englishText.toUpperCase().toCharArray()) {
+            if (englishToMorse.containsKey(c)) {
+                morseText.append(englishToMorse.get(c)).append(" ");
+            } else {
+                throw new IllegalArgumentException("Invalid character: " + c);
+            }
+        }
+        return morseText.toString().trim();
+    }
+
+    public String morseToEnglish(String morseCode) {
+        if (morseCode == null || morseCode.trim().isEmpty()) {
+            throw new IllegalArgumentException("Input cannot be empty or just whitespace");
+        }
+        StringBuilder englishText = new StringBuilder();
+        String[] words = morseCode.split(" ");
+        for (String word : words) {
+            if (word.equals("/")) {
+                englishText.append(" ");
+            } else if (morseToEnglish.containsKey(word)) {
+                englishText.append(morseToEnglish.get(word));
+            } else {
+                throw new IllegalArgumentException("Invalid Morse code: " + word);
+            }
+        }
+        return englishText.toString();
+    }
+}
