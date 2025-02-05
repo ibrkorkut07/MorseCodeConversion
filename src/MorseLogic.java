@@ -1,13 +1,12 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
-// Logic class for Morse Code Conversion
 public class MorseLogic {
     private static final Map<Character, String> englishToMorse = new HashMap<>();
     private static final Map<String, Character> morseToEnglish = new HashMap<>();
 
     static {
+        // Letters
         englishToMorse.put('A', ".-"); englishToMorse.put('B', "-..."); englishToMorse.put('C', "-.-.");
         englishToMorse.put('D', "-.."); englishToMorse.put('E', "."); englishToMorse.put('F', "..-.");
         englishToMorse.put('G', "--."); englishToMorse.put('H', "...."); englishToMorse.put('I', "..");
@@ -17,12 +16,27 @@ public class MorseLogic {
         englishToMorse.put('S', "..."); englishToMorse.put('T', "-"); englishToMorse.put('U', "..-");
         englishToMorse.put('V', "...-"); englishToMorse.put('W', ".--"); englishToMorse.put('X', "-..-");
         englishToMorse.put('Y', "-.--"); englishToMorse.put('Z', "--..");
+
+        // Numbers
         englishToMorse.put('0', "-----"); englishToMorse.put('1', ".----"); englishToMorse.put('2', "..---");
         englishToMorse.put('3', "...--"); englishToMorse.put('4', "....-"); englishToMorse.put('5', ".....");
         englishToMorse.put('6', "-...."); englishToMorse.put('7', "--..."); englishToMorse.put('8', "---..");
         englishToMorse.put('9', "----.");
-        englishToMorse.put(' ', "/"); // Space handling
 
+        // Special Characters & Punctuation
+        englishToMorse.put('.', ".-.-.-"); englishToMorse.put(',', "--..--"); englishToMorse.put('?', "..--..");
+        englishToMorse.put('!', "-.-.--"); englishToMorse.put(':', "---..."); englishToMorse.put(';', "-.-.-.");
+        englishToMorse.put('(', "-.--."); englishToMorse.put(')', "-.--.-"); englishToMorse.put('&', ".-...");
+        englishToMorse.put('@', ".--.-."); englishToMorse.put('=', "-...-"); englishToMorse.put('+', ".-.-.");
+        englishToMorse.put('-', "-....-"); englishToMorse.put('_', "..--.-"); englishToMorse.put('$', "...-..-");
+        englishToMorse.put('"', ".-..-."); englishToMorse.put('\'', ".----.");
+
+        // Support lowercase letters by adding them explicitly
+        for (Map.Entry<Character, String> entry : new HashMap<>(englishToMorse).entrySet()) {
+            englishToMorse.put(Character.toLowerCase(entry.getKey()), entry.getValue());
+        }
+
+        // Reverse map for Morse to English conversion
         for (Map.Entry<Character, String> entry : englishToMorse.entrySet()) {
             morseToEnglish.put(entry.getValue(), entry.getKey());
         }
@@ -32,10 +46,13 @@ public class MorseLogic {
         if (englishText == null || englishText.trim().isEmpty()) {
             throw new IllegalArgumentException("Input cannot be empty or just whitespace");
         }
+
         StringBuilder morseText = new StringBuilder();
-        for (char c : englishText.toUpperCase().toCharArray()) {
+        for (char c : englishText.toCharArray()) {
             if (englishToMorse.containsKey(c)) {
                 morseText.append(englishToMorse.get(c)).append(" ");
+            } else if (c == ' ') {
+                morseText.append("/ "); // Space between words in Morse
             } else {
                 throw new IllegalArgumentException("Invalid character: " + c);
             }
@@ -47,6 +64,7 @@ public class MorseLogic {
         if (morseCode == null || morseCode.trim().isEmpty()) {
             throw new IllegalArgumentException("Input cannot be empty or just whitespace");
         }
+
         StringBuilder englishText = new StringBuilder();
         String[] words = morseCode.split(" ");
         for (String word : words) {
