@@ -10,5 +10,17 @@ public class MorseLogicTest {
         assertEquals(".-- --- .-. .-.. -..", logic.englishToMorse("WORLD"));
         assertEquals(".... . .-.. .-.. --- / .-- --- .-. .-.. -..", logic.englishToMorse("HELLO WORLD"));
     }
+
+    
+    @Test
+    public void testMorseToEnglish() {
+        assertEquals("HELLO", logic.morseToEnglish(".... . .-.. .-.. ---"));
+        assertEquals("WORLD", logic.morseToEnglish(".-- --- .-. .-.. -.."));
+        assertEquals("HELLO WORLD", logic.morseToEnglish(".... . .-.. .-.. --- / .-- --- .-. .-.. -.."));
+    }
+
+
+
+
 }
 
