@@ -19,7 +19,13 @@ public class MorseLogicTest {
         assertEquals("HELLO WORLD", logic.morseToEnglish(".... . .-.. .-.. --- / .-- --- .-. .-.. -.."));
     }
 
-
+    @Test
+    public void testInvalidEnglishCharacter() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            logic.englishToMorse("HELLO#"); // Invalid character
+        });
+        assertTrue(exception.getMessage().contains("Invalid character"));
+    }
 
 
 }
