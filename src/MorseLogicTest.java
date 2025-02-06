@@ -27,6 +27,14 @@ public class MorseLogicTest {
         assertTrue(exception.getMessage().contains("Invalid character"));
     }
 
+    @Test
+    public void testInvalidMorseCode() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            logic.morseToEnglish(".... . .-.. .-.. --- ..--.-.-"); // Completely invalid Morse sequence
+        });
+        assertTrue(exception.getMessage().contains("Invalid Morse code"));
+    }
+
 
 }
 
