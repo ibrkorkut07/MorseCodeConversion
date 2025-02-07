@@ -11,7 +11,6 @@ public class MorseLogicTest {
         assertEquals(".... . .-.. .-.. --- / .-- --- .-. .-.. -..", logic.englishToMorse("HELLO WORLD"));
     }
 
-    
     @Test
     public void testMorseToEnglish() {
         assertEquals("HELLO", logic.morseToEnglish(".... . .-.. .-.. ---"));
@@ -35,6 +34,11 @@ public class MorseLogicTest {
         assertTrue(exception.getMessage().contains("Invalid Morse code"));
     }
 
-
+    @Test
+    public void testEmptyInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            logic.englishToMorse("");
+        });
+        assertEquals("Input cannot be empty or just whitespace", exception.getMessage());
+    }
 }
-
