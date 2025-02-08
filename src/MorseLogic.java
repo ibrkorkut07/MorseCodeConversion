@@ -46,14 +46,16 @@ public class MorseLogic {
             throw new IllegalArgumentException("Input cannot be empty or just whitespace");
         }
 
+        englishText = englishText.toUpperCase(); // Convert input to uppercase to handle lowercase letters
         StringBuilder morseText = new StringBuilder();
+
         for (char c : englishText.toCharArray()) {
             if (englishToMorse.containsKey(c)) {
                 morseText.append(englishToMorse.get(c)).append(" ");
             } else if (c == ' ') {
                 morseText.append("/ "); // Space between words in Morse
             } else {
-                throw new IllegalArgumentException("Invalid character: " + c); // Ensure exception is thrown
+                throw new IllegalArgumentException("Invalid character: " + c);
             }
         }
         return morseText.toString().trim();
@@ -65,16 +67,17 @@ public class MorseLogic {
         }
 
         StringBuilder englishText = new StringBuilder();
-        String[] words = morseCode.split(" ");
+        String[] words = morseCode.split(" "); // Split input by spaces
+
         for (String word : words) {
             if (word.equals("/")) {
-                englishText.append(" ");
+                englishText.append(" "); // Convert / back to space
             } else if (morseToEnglish.containsKey(word)) {
                 englishText.append(morseToEnglish.get(word));
             } else {
-                throw new IllegalArgumentException("Invalid Morse code: " + word); // Ensure exception is thrown
+                throw new IllegalArgumentException("Invalid Morse code: " + word);
             }
         }
-        return englishText.toString(); // Preserve original case
+        return englishText.toString();
     }
 }
