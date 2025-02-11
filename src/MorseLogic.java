@@ -33,7 +33,7 @@ public class MorseLogic {
         englishToMorse.put('(', "-.--."); englishToMorse.put(')', "-.--.-"); englishToMorse.put('&', ".-...");
         englishToMorse.put('@', ".--.-."); englishToMorse.put('=', "-...-"); englishToMorse.put('+', ".-.-.");
         englishToMorse.put('-', "-....-"); englishToMorse.put('_', "..--.-"); englishToMorse.put('$', "...-..-");
-        englishToMorse.put('"', ".-..-."); englishToMorse.put('\'', ".----."); englishToMorse.put('%', "-----.-");
+        englishToMorse.put('"', ".-..-."); englishToMorse.put(''', ".----."); englishToMorse.put('%', "-----.-");
 
         // Reverse map for Morse to English conversion
         for (Map.Entry<Character, String> entry : englishToMorse.entrySet()) {
