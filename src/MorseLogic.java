@@ -1,12 +1,18 @@
-import java.util.HashMap;
-import java.util.Map;
+package Explanations; // Defines the package where this class belongs
 
+import java.util.HashMap; // Importing HashMap for key-value storage
+import java.util.Map; // Importing Map interface for defining mappings
+
+// This class is responsible for handling Morse code conversions
 public class MorseLogic {
+    // Static HashMaps to store the mappings for Morse code conversions
+    // "static" means these maps belong to the class itself, not instances of the class
     private static final Map<Character, String> englishToMorse = new HashMap<>();
     private static final Map<String, Character> morseToEnglish = new HashMap<>();
 
+    // Static block initializes the mappings once when the class is loaded
     static {
-        // Letters
+        // Mapping English and Swedish letters to Morse code
         englishToMorse.put('A', ".-"); englishToMorse.put('B', "-..."); englishToMorse.put('C', "-.-.");
         englishToMorse.put('D', "-.."); englishToMorse.put('E', "."); englishToMorse.put('F', "..-.");
         englishToMorse.put('G', "--."); englishToMorse.put('H', "...."); englishToMorse.put('I', "..");
@@ -21,11 +27,6 @@ public class MorseLogic {
         englishToMorse.put('Å', ".--.-"); englishToMorse.put('Ä', ".-.-"); englishToMorse.put('Ö', "---.");
         englishToMorse.put('å', ".--.-"); englishToMorse.put('ä', ".-.-"); englishToMorse.put('ö', "---.");
 
-        // Numbers
-        englishToMorse.put('0', "-----"); englishToMorse.put('1', ".----"); englishToMorse.put('2', "..---");
-        englishToMorse.put('3', "...--"); englishToMorse.put('4', "....-"); englishToMorse.put('5', ".....");
-        englishToMorse.put('6', "-...."); englishToMorse.put('7', "--..."); englishToMorse.put('8', "---..");
-        englishToMorse.put('9', "----.");
 
         // Special Characters & Punctuation
         englishToMorse.put('.', ".-.-.-"); englishToMorse.put(',', "--..--"); englishToMorse.put('?', "..--..");
@@ -33,27 +34,28 @@ public class MorseLogic {
         englishToMorse.put('(', "-.--."); englishToMorse.put(')', "-.--.-"); englishToMorse.put('&', ".-...");
         englishToMorse.put('@', ".--.-."); englishToMorse.put('=', "-...-"); englishToMorse.put('+', ".-.-.");
         englishToMorse.put('-', "-....-"); englishToMorse.put('_', "..--.-"); englishToMorse.put('$', "...-..-");
-        englishToMorse.put('"', ".-..-."); englishToMorse.put(''', ".----."); englishToMorse.put('%', "-----.-");
+        englishToMorse.put('"', ".-..-."); englishToMorse.put('\'', ".----."); englishToMorse.put('%', "-----.-");
 
-        // Reverse map for Morse to English conversion
+        // Reverse mapping from Morse to English/Swedish
         for (Map.Entry<Character, String> entry : englishToMorse.entrySet()) {
             morseToEnglish.put(entry.getValue(), entry.getKey());
         }
     }
 
+    // Method to convert English/Swedish text to Morse code
     public String englishToMorse(String englishText) {
         if (englishText == null || englishText.trim().isEmpty()) {
             throw new IllegalArgumentException("Input cannot be empty or just whitespace");
         }
 
-        englishText = englishText.toUpperCase(); // Convert input to uppercase to handle lowercase letters
-        StringBuilder morseText = new StringBuilder();
+        englishText = englishText.toUpperCase(); // Convert input to uppercase
+        StringBuilder morseText = new StringBuilder(); // Efficiently build output
 
         for (char c : englishText.toCharArray()) {
             if (englishToMorse.containsKey(c)) {
                 morseText.append(englishToMorse.get(c)).append(" ");
             } else if (c == ' ') {
-                morseText.append("/ "); // Space between words in Morse
+                morseText.append("/ "); // Word separator in Morse code
             } else {
                 throw new IllegalArgumentException("Invalid character: " + c);
             }
@@ -61,17 +63,18 @@ public class MorseLogic {
         return morseText.toString().trim();
     }
 
+    // Method to convert Morse code to English/Swedish text
     public String morseToEnglish(String morseCode) {
         if (morseCode == null || morseCode.trim().isEmpty()) {
             throw new IllegalArgumentException("Input cannot be empty or just whitespace");
         }
 
         StringBuilder englishText = new StringBuilder();
-        String[] words = morseCode.split(" "); // Split input by spaces
+        String[] words = morseCode.split(" "); // Splitting Morse by spaces
 
         for (String word : words) {
             if (word.equals("/")) {
-                englishText.append(" "); // Convert / back to space
+                englishText.append(" "); // Convert Morse separator back to space
             } else if (morseToEnglish.containsKey(word)) {
                 englishText.append(morseToEnglish.get(word));
             } else {
