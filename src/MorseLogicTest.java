@@ -1,5 +1,6 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test; // Importing JUnit for unit testing
+import static org.junit.jupiter.api.Assertions.*; // Importing assertion methods for test validation
 
 public class MorseLogicTest {
     private final MorseLogic logic = new MorseLogic();
@@ -13,6 +14,7 @@ public class MorseLogicTest {
 
     @Test
     public void testMorseToEnglish() {
+        // Testing conversion of Morse code to English words
         assertEquals("HELLO", logic.morseToEnglish(".... . .-.. .-.. ---"));
         assertEquals("WORLD", logic.morseToEnglish(".-- --- .-. .-.. -.."));
         assertEquals("HELLO WORLD", logic.morseToEnglish(".... . .-.. .-.. --- / .-- --- .-. .-.. -.."));
@@ -20,26 +22,32 @@ public class MorseLogicTest {
 
     @Test
     public void testInvalidEnglishCharacter() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        try {
             logic.englishToMorse("HELLO#");
-        });
-        assertTrue(exception.getMessage().contains("Invalid character"));
+            fail("Expected IllegalArgumentException not thrown");
+        } catch (IllegalArgumentException exception) {
+            assertTrue(exception.getMessage().contains("Invalid character"));
+        }
     }
 
     @Test
     public void testInvalidMorseCode() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        try {
             logic.morseToEnglish(".... . .-.. .-.. --- ..--.-.-");
-        });
-        assertTrue(exception.getMessage().contains("Invalid Morse code"));
+            fail("Expected IllegalArgumentException not thrown");
+        } catch (IllegalArgumentException exception) {
+            assertTrue(exception.getMessage().contains("Invalid Morse code"));
+        }
     }
 
     @Test
     public void testEmptyInput() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        try {
             logic.englishToMorse("");
-        });
-        assertEquals("Input cannot be empty or just whitespace", exception.getMessage());
+            fail("Expected IllegalArgumentException not thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals("Input cannot be empty or just whitespace", exception.getMessage());
+        }
     }
 
     @Test
