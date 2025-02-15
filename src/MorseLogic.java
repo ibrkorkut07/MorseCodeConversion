@@ -34,8 +34,7 @@ public class MorseLogic {
         englishToMorse.put('@', ".--.-."); englishToMorse.put('=', "-...-"); englishToMorse.put('+', ".-.-.");
         englishToMorse.put('-', "-....-"); englishToMorse.put('_', "..--.-"); englishToMorse.put('$', "...-..-");
         englishToMorse.put('"', ".-..-."); englishToMorse.put('\'', ".----."); englishToMorse.put('%', "-----.-");
-
-        // Reverse map for Morse to English conversion
+        
         for (Map.Entry<Character, String> entry : englishToMorse.entrySet()) {
             morseToEnglish.put(entry.getValue(), entry.getKey());
         }
@@ -46,14 +45,14 @@ public class MorseLogic {
             throw new IllegalArgumentException("Input cannot be empty or just whitespace");
         }
 
-        englishText = englishText.toUpperCase(); // Convert input to uppercase to handle lowercase letters
+        englishText = englishText.toUpperCase(); 
         StringBuilder morseText = new StringBuilder();
 
         for (char c : englishText.toCharArray()) {
             if (englishToMorse.containsKey(c)) {
                 morseText.append(englishToMorse.get(c)).append(" ");
             } else if (c == ' ') {
-                morseText.append("/ "); // Space between words in Morse
+                morseText.append("/ "); 
             } else {
                 throw new IllegalArgumentException("Invalid character: " + c);
             }
@@ -67,11 +66,11 @@ public class MorseLogic {
         }
 
         StringBuilder englishText = new StringBuilder();
-        String[] words = morseCode.split(" "); // Split input by spaces
+        String[] words = morseCode.split(" "); 
 
         for (String word : words) {
             if (word.equals("/")) {
-                englishText.append(" "); // Convert / back to space
+                englishText.append(" "); 
             } else if (morseToEnglish.containsKey(word)) {
                 englishText.append(morseToEnglish.get(word));
             } else {
