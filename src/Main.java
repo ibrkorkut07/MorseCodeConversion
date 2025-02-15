@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-// Main class for user interaction
 public class Main {
     public static void main(String[] args) {
         MorseLogic logic = new MorseLogic();
@@ -14,7 +13,7 @@ public class Main {
             System.out.print("Enter your choice (1 or 2): ");
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
-                scanner.nextLine(); // Consume the newline character
+                scanner.nextLine();
                 if (choice == 1 || choice == 2) {
                     break;
                 } else {
@@ -22,7 +21,7 @@ public class Main {
                 }
             } else {
                 System.out.println("Invalid input. Please enter a number (1 or 2).");
-                scanner.next(); // Consume the invalid input
+                scanner.next();
             }
         }
 
@@ -38,7 +37,7 @@ public class Main {
                     System.out.println("Enter Morse code (separate letters with spaces, words with /):");
                     String morseCode = scanner.nextLine();
                     String englishText = logic.morseToEnglish(morseCode);
-                    System.out.println("The text: " + englishText); // Preserve original case
+                    System.out.println("The text: " + englishText);
                     break;
                 }
             } catch (IllegalArgumentException e) {
